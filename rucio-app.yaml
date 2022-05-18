@@ -1,0 +1,29 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: rucio-int 
+  namespace: default
+spec:
+  destination:
+    namespace: default 
+    server: https://kubernetes.default.svc
+  source:
+    path: int/
+    repoURL: https://github.com/bjwhite-fnal/rucio-ams2
+    targetRevision: main
+  sync:
+    comparedTo:
+      destination:
+        namespace: default 
+        server: https://kubernetes.default.svc
+      source:
+        path: int/
+        repoURL: https://github.com/bjwhite-fnal/rucio-ams2
+        targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    #syncOptions:
+    #- CreateNamespace=true
