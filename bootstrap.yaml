@@ -9,7 +9,7 @@ spec:
     namespace: argocd
     server: https://kubernetes.default.svc
   source:
-    repoURL: https://github.com/bjwhite-fnal/rucio-ams2.git
+    repoURL: https://github.io/bjwhite-fnal/rucio-ams2.git
     path: projects
   syncPolicy:
     automated:

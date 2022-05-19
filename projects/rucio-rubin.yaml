@@ -34,7 +34,7 @@ spec:
   - git:
       files:
       - path: apps/rucio-rubin/values-rucio-rubin.yaml
-      repoURL: https://github.com/bjwhite-fnal/rucio-ams2.git
+      repoURL: https://github.io/bjwhite-fnal/rucio-ams2.git
       requeueAfterSeconds: 20
       revision: ""
       template:
@@ -56,7 +56,7 @@ spec:
         server: 'https://kubernetes.default.svc'
       project: rucio-rubin
       source:
-        repoURL: https://github.com/bjwhite-fnal/rucio-ams2.git
+        repoURL: https://github.io/bjwhite-fnal/rucio-ams2.git
         path: '{{ path }}'
         targetRevision: 'main'
         helm:

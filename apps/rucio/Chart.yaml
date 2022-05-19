@@ -10,6 +10,6 @@ dependencies:
   # Rucio
   #
   - name: rucio-chart
-    repository: https://github.com/rucio/helm-charts.git
+    repository: https://github.io/rucio/helm-charts.git
     version: 1.28.2 
     alias: app
