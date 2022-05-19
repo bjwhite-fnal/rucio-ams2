@@ -1,0 +1,15 @@
+apiVersion: v2
+name: rucio 
+description: A Helm chart for Kubernetes
+type: application
+version: 1.28.4
+appVersion: "1.28.4"
+
+dependencies:
+  #
+  # Rucio
+  #
+  - name: rucio-chart
+    repository: https://github.com/rucio/helm-charts.git
+    version: 1.28.2 
+    alias: app

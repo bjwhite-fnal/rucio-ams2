@@ -1,0 +1,7 @@
+app:
+  containers:
+    - image: rucio/rucio-server:1.28.2
+  service:
+    ports:
+    - port: 443 
+    type: NodePort

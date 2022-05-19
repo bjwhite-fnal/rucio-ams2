@@ -1,0 +1,71 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  annotations:
+    argocd-autopilot.argoproj-labs.io/default-dest-server: https://kubernetes.default.svc
+    argocd.argoproj.io/sync-options: PruneLast=true
+  creationTimestamp: null
+  name: rucio-int 
+  namespace: argocd
+spec:
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
+  description: Integration Testing Rucio Deployment 
+  destinations:
+  - namespace: '*'
+    server: '*'
+  namespaceResourceWhitelist:
+  - group: '*'
+    kind: '*'
+  sourceRepos:
+  - '*'
+status: {}
+
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  creationTimestamp: null
+  name: rucio-int 
+  namespace: argocd
+spec:
+  generators:
+  - git:
+      files:
+      - path: apps/rucio-int/values-rucio-int.yaml
+      repoURL: https://github.com/bjwhite-fnal/rucio-ams2.git
+      requeueAfterSeconds: 20
+      revision: ""
+      template:
+        metadata: {}
+        spec:
+          destination: {}
+          project: ""
+          source:
+            repoURL: ""
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: '{{ path.basename }}'
+      name: {{ path.basename }}-rucio-int
+      namespace: argocd
+    spec:
+      destination:
+        namespace: 'rucio-int'
+        server: 'https://kubernetes.default.svc'
+      project: rucio-int 
+      source:
+        repoURL: https://github.com/bjwhite-fnal/rucio-ams2.git
+        path: '{{ path }}'
+        targetRevision: 'main'
+        helm:
+          valueFiles:
+            - values-rucio-int.yaml
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+        - CreateNamespace=true
+status: {}
